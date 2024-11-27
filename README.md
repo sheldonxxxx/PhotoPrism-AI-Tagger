@@ -11,6 +11,7 @@ This project is a Python-based caption generator for PhotoPrism, a self-hosted p
 ### AI Model
 ------------
 Caption: Kosmos-2
+
 Tag: Yolov11x
 
 ### Requirements
