@@ -8,6 +8,11 @@
 
 This project is a Python-based caption generator for PhotoPrism, a self-hosted photo management platform. It uses AI models to generate captions for photos and updates the PhotoPrism database with the generated captions.
 
+### AI Model
+------------
+Caption: Kosmos-2
+Tag: Yolov11x
+
 ### Requirements
 ---------------
 
