@@ -23,11 +23,11 @@ class DescriptionGenerator:
         
         self.processor = AutoProcessor.from_pretrained(constants.CAPTION_MODEL)
         
-    def generate(self, images):
-        inputs = self.processor(text=[self.prompt]*len(images), images=images, return_tensors="pt")
-        output = []
-        
+    def generate(self, images):        
         try:
+            inputs = self.processor(text=[self.prompt]*len(images), images=images, return_tensors="pt")
+            output = []
+            
             generated_ids = self.model.generate(
                 pixel_values=inputs["pixel_values"].to(self.device),
                 input_ids=inputs["input_ids"].to(self.device),
