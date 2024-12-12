@@ -1,4 +1,12 @@
 version: 2.1
+
+workflows:
+  image-build:
+    jobs:
+      - build:
+          context:
+            - github
+
 jobs:
   build:
     working_directory: ~/app
