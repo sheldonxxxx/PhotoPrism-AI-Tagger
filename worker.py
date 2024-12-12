@@ -24,8 +24,7 @@ while True:
     json_payload = {
         "count": count,
         "offset": offset,
-        "order": "oldest",
-#        "year": "2024",
+        "order": "added",
         "photo": True,
         "primary": True,
     }
@@ -50,6 +49,10 @@ while True:
             stop_signal = False
             for photo in batch:
                 photo_uid = photo['UID']
+                if not constants.FULL_SCAN and photo['Description']:
+                    logger.info(f"Photo {photo_uid} already has description, assuming all complete, if not, please re-run with env var FULL_SCAN=1")
+                    break
+                
                 status = processor.try_acquire_photo(photo_uid)
                 if not status:
                     # Photo is already being processed by another worker

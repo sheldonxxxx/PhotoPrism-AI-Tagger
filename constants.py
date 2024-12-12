@@ -10,7 +10,6 @@ PHOTOPRISM_PHOTO_API = os.environ.get('PHOTOPRISM_PHOTO_API', "/api/v1/photos")
 PHOTOPRISM_DL_API = os.environ.get('PHOTOPRISM_DL_API', "/api/v1/dl/{hash}")
 PHOTOPRISM_TOKEN = os.environ.get('PHOTOPRISM_TOKEN')
 
-
 DP = bool_t(os.environ.get('DISTRIBUTED_PROCESSING', '0'))
 
 if DP:
@@ -28,6 +27,7 @@ NODE_NAME = os.environ.get('NODE_NAME')
 
 TEMP_PHOTO_DIR = os.environ.get('TEMP_PHOTO_DIR', '/tmp')
 
+FULL_SCAN = bool_t(os.environ.get('FULL_SCAN', '0'))
 CAPTION_MODEL = os.environ.get('CAPTION_MODEL', 'microsoft/kosmos-2-patch14-224')
 CAPTION_BATCH_SIZE = int(os.environ.get('CAPTION_BATCH_SIZE', 1))
 YOLO_MODEL = os.environ.get('CLS_MODEL', 'yolo11x-cls.pt')
