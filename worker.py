@@ -1,4 +1,5 @@
 import os
+import sys
 import utils
 import constants
 from detection import DescriptionGenerator, Classifier
@@ -51,7 +52,7 @@ while True:
                 photo_uid = photo['UID']
                 if not constants.FULL_SCAN and photo['Description']:
                     logger.info(f"Photo {photo_uid} already has description, assuming all complete, if not, please re-run with env var FULL_SCAN=1")
-                    break
+                    sys.exit(0)
                 
                 status = processor.try_acquire_photo(photo_uid)
                 if not status:
