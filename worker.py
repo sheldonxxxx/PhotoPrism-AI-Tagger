@@ -77,7 +77,7 @@ while True:
                 
                 # Skip photos that already have captions unless FULL_SCAN is enabled
                 if not constants.FULL_SCAN and photo['Caption']:
-                    logger.info(f"Photo {photo_uid} already has description, assuming all complete, if not, please re-run with env var FULL_SCAN=1")
+                    logger.info(f"Photo {photo_uid} already has caption, assuming all complete, if not, please re-run with env var FULL_SCAN=1")
                     sys.exit(0)
                 
                 # Try to acquire the photo for processing
@@ -125,7 +125,7 @@ while True:
                 update_response = utils.update_photo_detail(photo_uid, request_data, headers)
                 
                 if update_response:
-                    logger.info(f"Updated description for {photo_uid}")
+                    logger.info(f"Updated caption for {photo_uid}")
                     detail = update_response.json()['Details']
                     
                     # Append new labels to existing keywords

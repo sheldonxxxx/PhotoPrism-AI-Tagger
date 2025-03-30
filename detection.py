@@ -1,4 +1,5 @@
 import os
+import time
 import torch
 import platform
 import constants
@@ -25,6 +26,7 @@ class Kosmos2DescriptionGenerator:
         
     def generate(self, images):        
         try:
+            start_time = time.time()
             inputs = self.processor(text=[self.prompt]*len(images), images=images, return_tensors="pt")
             output = []
             
@@ -44,6 +46,10 @@ class Kosmos2DescriptionGenerator:
             for text in generated_texts:
                 processed_text, _ = self.processor.post_process_generation(text)
                 output.append(processed_text)
+                
+            end_time = time.time()
+            logger.info(f"Caption generation took {end_time - start_time:.2f} seconds")
+            
             return output
         except Exception as e:
             logger.error(f"Error generating caption: {str(e)}")
@@ -56,19 +62,21 @@ class Florence2DescriptionGenerator:
         self.model = AutoModelForCausalLM.from_pretrained(constants.FLORENCE2_MODEL, trust_remote_code=True)
         
         self.device = 'cpu'
-        self.torch_dtype=torch.float32
+        self.torch_dtype = torch.float32
         if torch.cuda.is_available():
             self.device = 'cuda'
-            self.torch_dtype=torch.float16
+            self.torch_dtype = torch.float16
         elif torch.backends.mps.is_available():
             self.device = 'mps'
-            self.torch_dtype=torch.float16
+            self.torch_dtype = torch.float16
         self.model = self.model.to(dtype=self.torch_dtype, device=self.device)
         
         self.processor = AutoProcessor.from_pretrained(constants.FLORENCE2_MODEL, trust_remote_code=True)
         
     def generate(self, images):        
         try:
+            start_time = time.time()
+            
             inputs = self.processor(
                 text=[self.prompt]*len(images), 
                 images=images, 
@@ -89,6 +97,10 @@ class Florence2DescriptionGenerator:
             for text in generated_texts:
                 processed_text = text.replace('<s>', '').replace('</s>', '')
                 output.append(processed_text)
+            
+            end_time = time.time()
+            logger.info(f"Caption generation took {end_time - start_time:.2f} seconds")
+            
             return output
         except Exception as e:
             logger.error(f"Error generating caption: {str(e)}")
@@ -102,6 +114,7 @@ class Classifier:
     def classify(self, images):
         output = []
         try:
+            start_time = time.time()
             results = self.model.predict(images, verbose=False)
             for result in results:
                 temp = []
@@ -109,6 +122,9 @@ class Classifier:
                     if result.probs.top5conf[idx] > constants.YOLO_CONFIDENCE:
                         temp.append(result.names[label])
                 output.append(temp)
+                
+            end_time = time.time()
+            logger.info(f"Label generation took {end_time - start_time:.2f} seconds")
             return output
         except Exception as e:
             logger.error(f"Error classifying: {str(e)}")
