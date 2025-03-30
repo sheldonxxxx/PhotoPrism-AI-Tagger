@@ -103,7 +103,7 @@ while True:
                 continue
                 
             # Generate captions for the batch of images
-            images = [Image.open(save_path) for _, save_path in batch_data]
+            images = [Image.open(save_path).convert("RGB") for _, save_path in batch_data]
             captions = caption_processor.generate(images)
             if not captions:
                 for photo_uid, _ in batch_data:
