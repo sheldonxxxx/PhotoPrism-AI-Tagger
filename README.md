@@ -25,7 +25,7 @@ This project is a Python-based caption generator for PhotoPrism, a self-hosted p
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/sheldonxxx/PhotoPrism-AI-Tagger.git
+   git clone https://github.com/sheldonxxxx/PhotoPrism-AI-Tagger.git
    cd PhotoPrism-AI-Tagger
    ```
 2. Install `uv`:

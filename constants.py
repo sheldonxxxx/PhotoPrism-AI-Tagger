@@ -1,4 +1,5 @@
 import os
+import tempfile
 import dotenv
 
 dotenv.load_dotenv()
@@ -33,7 +34,7 @@ PHOTO_START_OFFSET = int(os.environ.get('PHOTO_START_OFFSET', 0))  # Offset for 
 NODE_NAME = os.environ.get('NODE_NAME')  # Name of the processing node
 
 # Temporary directory for photo storage
-TEMP_PHOTO_DIR = os.environ.get('TEMP_PHOTO_DIR', '/tmp')  # Directory for temporary photo storage
+TEMP_PHOTO_DIR = os.environ.get('TEMP_PHOTO_DIR', tempfile.gettempdir())
 
 # Scanning and model configuration
 FULL_SCAN = bool_t(os.environ.get('FULL_SCAN', '0'))  # Enable or disable full scan mode

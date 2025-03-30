@@ -146,7 +146,10 @@ while True:
                         
                         # Remove the temporary photo file
                         if os.path.exists(save_path):
-                            os.remove(save_path)
+                            try:
+                                os.remove(save_path)
+                            except Exception as e:
+                                logger.error(f"Error removing file {save_path}: {e}")
             
     else:
         # Log an error and stop processing if the API call fails
