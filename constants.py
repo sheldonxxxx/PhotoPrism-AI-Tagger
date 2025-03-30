@@ -45,3 +45,6 @@ CAPTION_BATCH_SIZE = int(os.environ.get('CAPTION_BATCH_SIZE', 1))  # Batch size 
 # YOLO model configuration
 YOLO_MODEL = os.environ.get('CLS_MODEL', 'yolo11x-cls.pt')  # YOLO model file
 YOLO_CONFIDENCE = float(os.environ.get('YOLO_CONFIDENCE', 0.7))  # Confidence threshold for YOLO model
+
+CLEANUP = bool_t(os.environ.get('CLEANUP', '0'))  # Enable or disable cleanup before processing
+CLEANUP_STALE_HOURS = int(os.environ.get('CLEANUP_STALE_HOURS', 24))  # Stale hours for cleanup

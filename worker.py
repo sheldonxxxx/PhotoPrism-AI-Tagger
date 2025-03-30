@@ -33,6 +33,11 @@ else:
 # Initialize the classifier for label detection
 yolo_processor = Classifier()
 
+if constants.CLEANUP:
+    # Clean up stale tasks if enabled
+    processor.cleanup_stale_tasks(constants.CLEANUP_STALE_HOURS)
+    logger.info(f"Cleaned up stale tasks older than {constants.CLEANUP_STALE_HOURS} hours")
+
 # Main processing loop
 while True:
     # Prepare the payload for fetching photos

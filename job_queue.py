@@ -149,6 +149,8 @@ class PhotoProcessor:
                          .filter(self.TaskModel.status == 'processing',
                                 self.TaskModel.started_at < stale_time)
                          .all())
+
+            self.logger.info(f"Cleaning up {len(stale_tasks)} stale tasks")
             
             for task in stale_tasks:
                 task.status = 'pending'

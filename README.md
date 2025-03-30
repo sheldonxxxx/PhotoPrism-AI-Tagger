@@ -28,15 +28,19 @@ This project is a Python-based caption generator for PhotoPrism, a self-hosted p
    git clone https://github.com/sheldonxxx/PhotoPrism-AI-Tagger.git
    cd PhotoPrism-AI-Tagger
    ```
-2. Install dependencies:
+2. Install `uv`:
+   ```bash
+   curl -LsSf https://astral.sh/uv/install.sh | sh
+   ```
+3. Install dependencies:
    ```bash
    python -m uv pip install -r requirements.txt
    ```
-3. Rename `.env1` to `.env` and configure it with your PhotoPrism API credentials and other settings (see `constants.py` for details).
-4. Edit `json_payload` in `worker.py` to match your filtering needs.
-5. Run the script:
+4. Rename `.env1` to `.env` and configure it with your PhotoPrism API credentials and other settings (see `constants.py` for details).
+5. Edit `json_payload` in `worker.py` to match your filtering needs.
+6. Run the script:
    ```bash
-   python worker.py
+   python -m uv python worker.py
    ```
 
 ### GPU Installation (Linux)
@@ -48,18 +52,22 @@ This project is a Python-based caption generator for PhotoPrism, a self-hosted p
    ```
 3. Clone the repository:
    ```bash
-   git clone https://github.com/sheldonchiu/PhotoPrism-AI-Tagger.git
+   git clone https://github.com/sheldonxxxx/PhotoPrism-AI-Tagger.git
    cd PhotoPrism-AI-Tagger
    ```
-4. Install dependencies:
+4. Install `uv`:
+   ```bash
+   pip install uv
+   ```
+5. Install dependencies:
    ```bash
    python -m uv pip install -r requirements.txt
    ```
-5. Rename `.env1` to `.env` and configure it with your PhotoPrism API credentials and other settings (see `constants.py` for details).
-6. Edit `json_payload` in `worker.py` to match your filtering needs.
-7. Run the script:
+6. Rename `.env1` to `.env` and configure it with your PhotoPrism API credentials and other settings (see `constants.py` for details).
+7. Edit `json_payload` in `worker.py` to match your filtering needs.
+8. Run the script:
    ```bash
-   python worker.py
+   python -m uv python worker.py
    ```
 
 ### GPU Installation (Mac)
@@ -73,15 +81,19 @@ This project is a Python-based caption generator for PhotoPrism, a self-hosted p
    git clone https://github.com/sheldonchiu/PhotoPrism-AI-Tagger.git
    cd PhotoPrism-AI-Tagger
    ```
-3. Install dependencies:
+3. Install `uv`:
+   ```bash
+   pip install uv
+   ```
+4. Install dependencies:
    ```bash
    python -m uv pip install -r requirements.txt
    ```
-4. Rename `.env1` to `.env` and configure it with your PhotoPrism API credentials and other settings (see `constants.py` for details).
-5. Edit `json_payload` in `worker.py` to match your filtering needs.
-6. Run the script:
+5. Rename `.env1` to `.env` and configure it with your PhotoPrism API credentials and other settings (see `constants.py` for details).
+6. Edit `json_payload` in `worker.py` to match your filtering needs.
+7. Run the script:
    ```bash
-   python worker.py
+   python -m uv python worker.py
    ```
 
 ## Configuration
@@ -97,7 +109,7 @@ The script uses environment variables to configure the PhotoPrism API connection
 
 1. Run the script:
    ```bash
-   python worker.py
+   python -m uv python worker.py
    ```
 2. The script will process photos in batches, generate captions, and update the PhotoPrism database.
 3. Monitor progress and errors in the console output.
