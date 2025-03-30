@@ -1,79 +1,109 @@
-
-
 **PhotoPrism Caption Generator**
 =====================================
 
-### Overview
-------------
+## Overview
 
 This project is a Python-based caption generator for PhotoPrism, a self-hosted photo management platform. It uses AI models to generate captions for photos and updates the PhotoPrism database with the generated captions.
 
-### AI Model
-------------
-Caption: Kosmos-2
+## AI Models
 
-Tag: Yolov11x
+- **Caption Models**:
+  - Florence 2: Super detailed but slower.
+  - Kosmos-2: Faster on both CPU and GPU but less detailed.
+- **Tagging Model**:
+  - Yolov11x: Used for image classification and tagging.
 
-### Requirements
----------------
+## Requirements
 
-* Python 3.10+
-* PhotoPrism instance with API access
-* GPU (optional but recommended for faster processing)
+- Python 3.10+
+- PhotoPrism instance with API access
+- GPU (optional but recommended for faster processing)
 
-### Installation
----------------
+## Installation
 
-#### CPU Installation
+### CPU Installation
 
-1. Clone the repository: `git clone https://github.com/sheldonchiu/PhotoPrism-AI-Tagger.git`
-2. Install torch: `pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu`
-3. Install dependencies: `pip install -r requirements.txt`
-4. Rename `.env1` to `.env` and fill it with your PhotoPrism API credentials and other configuration settings (see `constants.py` for details)
-5. Edit `json_payload` in worker.py to match your own filtering needs
-6. Run the script: `python worker.py`
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/sheldonxxx/PhotoPrism-AI-Tagger.git
+   cd PhotoPrism-AI-Tagger
+   ```
+2. Install dependencies:
+   ```bash
+   python -m uv pip install -r requirements.txt
+   ```
+3. Rename `.env1` to `.env` and configure it with your PhotoPrism API credentials and other settings (see `constants.py` for details).
+4. Edit `json_payload` in `worker.py` to match your filtering needs.
+5. Run the script:
+   ```bash
+   python worker.py
+   ```
 
-#### GPU Installation (Linux)
+### GPU Installation (Linux)
 
-1. Install CUDA and cuDNN (if not already installed)
-2. Install the GPU version of PyTorch: `pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118`
-3. Install the GPU version of transformers: `pip install transformers --index-url https://download.pytorch.org/whl/cu118`
-4. Clone the repository: `git clone https://github.com/sheldonchiu/PhotoPrism-AI-Tagger.git`
-5. Install dependencies: `pip install -r requirements.txt`
-6. Rename `.env1` to `.env` and fill it with your PhotoPrism API credentials and other configuration settings (see `constants.py` for details)
-7. Edit `json_payload` in worker.py to match your own filtering needs
-8. Run the script: `python worker.py`
+1. Install CUDA and cuDNN (if not already installed).
+2. Install the GPU version of PyTorch:
+   ```bash
+   pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
+   ```
+3. Clone the repository:
+   ```bash
+   git clone https://github.com/sheldonchiu/PhotoPrism-AI-Tagger.git
+   cd PhotoPrism-AI-Tagger
+   ```
+4. Install dependencies:
+   ```bash
+   python -m uv pip install -r requirements.txt
+   ```
+5. Rename `.env1` to `.env` and configure it with your PhotoPrism API credentials and other settings (see `constants.py` for details).
+6. Edit `json_payload` in `worker.py` to match your filtering needs.
+7. Run the script:
+   ```bash
+   python worker.py
+   ```
 
-#### GPU Installation (Mac)
+### GPU Installation (Mac)
 
-1. Install PyTorch: `pip install torch torchvision torchaudio`
-2. Clone the repository: `git clone https://github.com/sheldonchiu/PhotoPrism-AI-Tagger.git`
-3. Install dependencies: `pip install -r requirements.txt`
-4. Rename `.env1` to `.env` and fill it with your PhotoPrism API credentials and other configuration settings (see `constants.py` for details)
-5. Edit `json_payload` in worker.py to match your own filtering needs
-6. Run the script: `python worker.py`
+1. Install PyTorch:
+   ```bash
+   pip install torch torchvision torchaudio
+   ```
+2. Clone the repository:
+   ```bash
+   git clone https://github.com/sheldonchiu/PhotoPrism-AI-Tagger.git
+   cd PhotoPrism-AI-Tagger
+   ```
+3. Install dependencies:
+   ```bash
+   python -m uv pip install -r requirements.txt
+   ```
+4. Rename `.env1` to `.env` and configure it with your PhotoPrism API credentials and other settings (see `constants.py` for details).
+5. Edit `json_payload` in `worker.py` to match your filtering needs.
+6. Run the script:
+   ```bash
+   python worker.py
+   ```
 
-
-### Configuration
---------------
+## Configuration
 
 The script uses environment variables to configure the PhotoPrism API connection and other settings. You can create a `.env` file with the following variables:
 
-* `PHOTOPRISM_ROOT_URL`: the URL of your PhotoPrism instance
-* `PHOTOPRISM_TOKEN`: your PhotoPrism API token
-* `NODE_NAME`: a unique identifier for this worker (default: `worker1`)
-* `TEMP_PHOTO_DIR`: a temporary directory for storing downloaded photos (default: `/tmp`)
+- `PHOTOPRISM_ROOT_URL`: The URL of your PhotoPrism instance.
+- `PHOTOPRISM_TOKEN`: Your PhotoPrism API token.
+- `NODE_NAME`: A unique identifier for this worker (default: `worker1`).
+- `TEMP_PHOTO_DIR`: A temporary directory for storing downloaded photos (default: `/tmp`).
 
-### Usage
------
+## Usage
 
-1. Run the script: `python worker.py`
-2. The script will start processing photos in batches, generating captions and updating the PhotoPrism database.
-3. You can monitor the progress and any errors in the console output.
+1. Run the script:
+   ```bash
+   python worker.py
+   ```
+2. The script will process photos in batches, generate captions, and update the PhotoPrism database.
+3. Monitor progress and errors in the console output.
 
-### Troubleshooting
-------------------
+## Troubleshooting
 
-* Make sure your PhotoPrism API credentials are correct and the API is accessible.
-* Check the console output for any error messages or exceptions.
-* If you encounter issues with the GPU installation, try reinstalling PyTorch and transformers with the `--no-deps` flag.
+- Ensure your PhotoPrism API credentials are correct and the API is accessible.
+- Check the console output for error messages or exceptions.
+- If GPU installation issues occur, try reinstalling PyTorch and transformers with the `--no-deps` flag.
