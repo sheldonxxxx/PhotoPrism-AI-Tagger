@@ -87,7 +87,7 @@ The script uses environment variables to configure the PhotoPrism API connection
 | `YOLO_CONFIDENCE`      | Confidence threshold for YOLO tagging (0.0 to 1.0).                       |
 | `CLEANUP`              | Enable cleanup of stale job (1 for enabled, 0 for disabled).         |
 | `CLEANUP_STALE_HOURS`  | Number of hours after which stale job are cleaned up.                    |
-| `PHOTO_START_OFFSET`   | Offset for starting photo processing (useful for resuming).                |
+| `RESUME`   | If true, resume from last job position                |
 | `TOKENIZERS_PARALLELISM` | Enable or disable parallelism for tokenizers (For Debug).                |
 | `FULL_SCAN`            | Perform a full scan of the PhotoPrism library (For Debug). |
 

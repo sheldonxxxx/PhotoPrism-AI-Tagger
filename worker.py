@@ -10,9 +10,6 @@ import logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-# Initialize offset and headers for API requests
-offset = constants.PHOTO_START_OFFSET
-
 headers = {
     "X-Auth-Token": constants.PHOTOPRISM_TOKEN,
 }
@@ -37,6 +34,17 @@ if constants.CLEANUP:
     # Clean up stale tasks if enabled
     processor.cleanup_stale_tasks(constants.CLEANUP_STALE_HOURS)
     logger.info(f"Cleaned up stale tasks older than {constants.CLEANUP_STALE_HOURS} hours")
+    
+offset = 0
+if constants.RESUME:
+    offset = processor.get_finish_job_count()
+    if offset is None:
+        logger.error("Error getting offset from database, please check your database connection")
+        sys.exit(-1)
+    offset -= 100
+    if offset < 0:
+        offset = 0
+    logger.info(f"Resuming from offset {offset}")
 
 # Main processing loop
 while True:
@@ -103,7 +111,16 @@ while True:
                 continue
                 
             # Generate captions for the batch of images
-            images = [Image.open(save_path).convert("RGB") for _, save_path in batch_data]
+            images = []
+            for photo_uid, save_path in batch_data:
+                try:
+                    images.append(Image.open(save_path).convert("RGB"))
+                except Exception as e:
+                    logger.error(f"Error opening image {save_path}: {e}")
+                    processor.mark_complete(photo_uid, "Error")
+                    # remove task from batch_data
+                    batch_data.remove((photo_uid, save_path))
+                    
             captions = caption_processor.generate(images)
             if not captions:
                 for photo_uid, _ in batch_data:

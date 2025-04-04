@@ -92,7 +92,7 @@ class Florence2DescriptionGenerator:
             )
             
             generated_ids = generated_ids.cpu()
-            generated_texts = self.processor.batch_decode(generated_ids, skip_special_tokens=False)
+            generated_texts = self.processor.batch_decode(generated_ids, skip_special_tokens=True)
             
             for text in generated_texts:
                 processed_text = text.replace('<s>', '').replace('</s>', '')

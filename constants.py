@@ -27,9 +27,6 @@ else:
     # Local database file path
     DB_PATH = os.environ.get('DB_PATH', 'photo_tasks.db')  # Path to local SQLite database
 
-# Photo processing configuration
-PHOTO_START_OFFSET = int(os.environ.get('PHOTO_START_OFFSET', 0))  # Offset for starting photo processing
-
 # Node configuration
 NODE_NAME = os.environ.get('NODE_NAME')  # Name of the processing node
 
@@ -49,3 +46,5 @@ YOLO_CONFIDENCE = float(os.environ.get('YOLO_CONFIDENCE', 0.7))  # Confidence th
 
 CLEANUP = bool_t(os.environ.get('CLEANUP', '0'))  # Enable or disable cleanup before processing
 CLEANUP_STALE_HOURS = int(os.environ.get('CLEANUP_STALE_HOURS', 24))  # Stale hours for cleanup
+
+RESUME = bool_t(os.environ.get('RESUME', '0'))  # Enable or disable resume mode

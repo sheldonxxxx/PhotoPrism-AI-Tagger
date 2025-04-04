@@ -113,6 +113,17 @@ class PhotoProcessor:
             return False
         finally:
             session.close()
+            
+    def get_finish_job_count(self) -> int:
+        session = self.Session()
+        try:
+            count = session.query(self.TaskModel).count()
+            return count
+        except Exception as e:
+            self.logger.error(f"Error getting job count: {str(e)}")
+            return None
+        finally:
+            session.close()
 
     def mark_complete(self, photo_uid: str, error_message: str = None) -> bool:
         session = self.Session()
